@@ -1,9 +1,7 @@
 name: Auto generated debian n2n Package for Nexet SDN Network
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
   build:
