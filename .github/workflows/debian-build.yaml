@@ -27,6 +27,15 @@ jobs:
         os:
           - ubuntu-20.04
           - ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Fix Checkout
+        run: |
+          git submodule update --init --recursive
+          git fetch --force --tags
+
   package_dpkg:
     name: Package for Debian/Ubuntu
     needs:
