@@ -81,11 +81,6 @@ jobs:
         run: |
           cd n2n/packages/debian/
           make
-      - name: Upload dpkg
-        uses: actions/upload-artifact@v2
-        with:
-          name: packages-dpkg
-          path: n2n/packages/debian/*.deb
       - name: Uploading to Release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
