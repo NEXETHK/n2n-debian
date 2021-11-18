@@ -81,11 +81,32 @@ jobs:
         run: |
           cd n2n/packages/debian/
           make
-      - name: Uploading to Release
-        uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Upload dpkg
+        uses: actions/upload-artifact@v2
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: false
+          name: packages-dpkg
+          path: n2n/packages/debian/*.deb
+          
+  upload_releases:
+    name: Upload Release Assets
+    if: startsWith(github.ref, 'refs/tags/')
+    needs:
+      - package_dpkg
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Fetch all Artifacts
+        if: steps.get_tagtype.outputs.TAGTYPE == 'tag'
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+
+       - name: Upload Assets to Release
+        if: steps.get_tagtype.outputs.TAGTYPE == 'tag'
+        uses: softprops/action-gh-release@v1
+        with:
+          prerelease: true
           files: |
-            n2n/packages/debian/*.deb
+            artifacts/packages-dpkg/*.deb
+
+
