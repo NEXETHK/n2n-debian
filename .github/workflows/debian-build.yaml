@@ -1,0 +1,19 @@
+name: Auto generated debian n2n Package for Nexet SDN Network
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Fix Checkout
+        run: |
+          git fetch --force --tags
