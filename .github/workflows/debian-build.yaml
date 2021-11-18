@@ -86,3 +86,11 @@ jobs:
         with:
           name: packages-dpkg
           path: n2n/packages/debian/*.deb
+      - name: Uploading to Release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          files: |
+            n2n/packages/debian/*.deb
