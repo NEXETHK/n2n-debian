@@ -17,7 +17,7 @@ jobs:
       - name: Fix Checkout
         run: |
           git submodule update --init --recursive 
-test_linux:
+  test_linux:
     needs: smoketest
     name: Test Linux
     runs-on: ${{ matrix.os }}
@@ -27,7 +27,7 @@ test_linux:
         os:
           - ubuntu-20.04
           - ubuntu-18.04
-package_dpkg:
+  package_dpkg:
     name: Package for Debian/Ubuntu
     needs:
       - test_linux
