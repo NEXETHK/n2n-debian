@@ -18,7 +18,6 @@ jobs:
         run: |
           git submodule update --init --recursive 
   test_linux:
-    needs: smoketest
     name: Test Linux
     runs-on: ${{ matrix.os }}
     strategy:
